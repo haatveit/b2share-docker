@@ -66,7 +66,7 @@ services:
 
     mq:
         hostname: b2share-redis
-        image: rabbitmq:3.6-management-alpine
+        image: rabbitmq:3.8-management-alpine
         environment:
             - "RABBITMQ_DEFAULT_USER=${B2SHARE_RABBITMQ_USER}"
             - "RABBITMQ_DEFAULT_PASS=${B2SHARE_RABBITMQ_PASS}"
