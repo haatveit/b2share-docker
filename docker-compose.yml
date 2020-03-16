@@ -7,7 +7,7 @@ services:
             - "POSTGRES_USER=${B2SHARE_POSTGRESQL_USER}"
             - "PGDATA=/var/lib/postgresql/data"
         volumes:
-            - "${B2SHARE_DATADIR}/postgres-data:/var/lib/postgresql/data"
+            - "postgres-data:/var/lib/postgresql/data"
         expose:
             - "5432"
 
@@ -31,7 +31,7 @@ services:
             - "B2SHARE_CELERY_RESULT_BACKEND='redis://redis:6379/2'"
             - "B2SHARE_SEARCH_ELASTIC_HOSTS='elasticsearch'"
         volumes:
-            - "${B2SHARE_DATADIR}/b2share-data:/usr/var/b2share-instance"
+            - "b2share-data:/usr/var/b2share-instance"
         expose:
             - "5000"
         links:
@@ -45,22 +45,20 @@ services:
             - "9200"
             - "9300"
         volumes:
-            - "${B2SHARE_DATADIR}/elasticsearch-data:/usr/share/elasticsearch/data"
+            - "elasticsearch-data:/usr/share/elasticsearch/data"
 
     redis:
         image: redis:5-alpine
         expose:
             - "6379"
         volumes:
-            - "${B2SHARE_DATADIR}/redis-data:/data"
+            - "redis-data:/data"
 
     nginx:
         build: nginx:stable-alpine
         ports:
             - "80:80"
             - "443:443"
-        # volumes:
-        #     - "${B2SHARE_DATADIR}/nginx-data/ssl:/etc/ssl/"
         links:
             - b2share
 
@@ -74,4 +72,11 @@ services:
             - "15672"
             - "5672"
         volumes:
-            - "${B2SHARE_DATADIR}/rabbitmq-data:/var/lib/rabbitmq"
+            - "rabbitmq-data:/var/lib/rabbitmq"
+
+volumes:
+    postgres-data:
+    b2share-data:
+    elasticsearch-data:
+    redis-data:
+    rabbitmq-data:
