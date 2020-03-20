@@ -42,6 +42,8 @@ services:
 
     elasticsearch:
         image: elasticsearch:7.6.0
+        environment:
+            - "discovery.type=single-node"
         expose:
             - "9200"
             - "9300"
