@@ -1,6 +1,7 @@
-FROM nginx:1.11
+FROM nginx:stable-alpine
 EXPOSE 80 443
 
+RUN apk add --no-cache openssl
 RUN rm /etc/nginx/conf.d/*.conf
 RUN mkdir -p /etc/ssl/
 RUN openssl genrsa -out /etc/ssl/b2share.key 2048

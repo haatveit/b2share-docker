@@ -55,7 +55,7 @@ services:
             - "redis-data:/data"
 
     nginx:
-        build: nginx:stable-alpine
+        build: nginx
         ports:
             - "80:80"
             - "443:443"
